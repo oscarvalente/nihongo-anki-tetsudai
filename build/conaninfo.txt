@@ -1,0 +1,36 @@
+[settings]
+    arch=x86_64
+    build_type=Release
+    compiler=apple-clang
+    compiler.libcxx=libc++
+    compiler.version=12.0
+    os=Macos
+
+[requires]
+    yaml-cpp/0.7.0
+
+[options]
+
+
+[full_settings]
+    arch=x86_64
+    arch_build=x86_64
+    build_type=Release
+    compiler=apple-clang
+    compiler.libcxx=libc++
+    compiler.version=12.0
+    os=Macos
+    os_build=Macos
+
+[full_requires]
+    yaml-cpp/0.7.0:6a83d7f783e7ee89a83cf2fe72b5f5f67538e2a6
+
+[full_options]
+    yaml-cpp:fPIC=True
+    yaml-cpp:shared=False
+
+[recipe_hash]
+
+
+[env]
+    CXX=/usr/local/Cellar/llvm@12/12.0.1_1/bin/clang-12

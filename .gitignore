@@ -1,0 +1,7 @@
+# IDE
+.DS_Store
+.idea/*
+
+# Generated dirs
+cmake-build-debug/
+CMakeFiles/

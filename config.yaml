@@ -1,0 +1,7 @@
+dicts:
+  - jisho
+  - japandict
+  - wwwjdic
+jisho:
+  url https://jisho.org/
+  api api/v1/search/words?keyword=

@@ -1,0 +1,24 @@
+{
+ "graph_lock": {
+  "nodes": {
+   "0": {
+    "options": "yaml-cpp:fPIC=True\nyaml-cpp:shared=False",
+    "requires": [
+     "1"
+    ],
+    "path": "../../conanfile.txt",
+    "context": "host"
+   },
+   "1": {
+    "ref": "yaml-cpp/0.7.0",
+    "options": "fPIC=True\nshared=False",
+    "package_id": "6a83d7f783e7ee89a83cf2fe72b5f5f67538e2a6",
+    "prev": "0",
+    "context": "host"
+   }
+  },
+  "revisions_enabled": false
+ },
+ "version": "0.4",
+ "profile_host": "[settings]\narch=x86_64\narch_build=x86_64\nbuild_type=Release\ncompiler=apple-clang\ncompiler.libcxx=libc++\ncompiler.version=12.0\nos=Macos\nos_build=Macos\n[options]\n[build_requires]\n[env]\nCXX=/usr/local/Cellar/gcc/11.2.0_3/bin/g++-11"
+}

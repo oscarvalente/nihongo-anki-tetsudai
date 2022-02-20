@@ -1,0 +1,7 @@
+[requires]
+yaml-cpp/0.7.0
+
+[generators]
+cmake
+cmake_find_package
+cmake_paths
