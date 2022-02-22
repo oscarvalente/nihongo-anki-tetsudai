@@ -1,7 +1,7 @@
-dicts:
+_dicts:
   - jisho
-  - japandict
-  - wwwjdic
+  #- japandict
+  #- wwwjdic
 jisho:
-  url https://jisho.org/
-  api api/v1/search/words?keyword=
+  domain: jisho.org
+  api: /api/v1/search/words?keyword=
