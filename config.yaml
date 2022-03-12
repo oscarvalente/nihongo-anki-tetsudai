@@ -3,5 +3,5 @@ _dicts:
   #- japandict
   #- wwwjdic
 jisho:
-  domain: jisho.org
-  api: /api/v1/search/words?keyword=
+  domain: https://jisho.org
+  api: /search/{0}%20%23sentences

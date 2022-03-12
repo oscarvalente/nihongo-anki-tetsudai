@@ -1,7 +1,10 @@
-#include <iostream>
-#include <assert.h>
 
+#include <iostream>
+
+#include <assert.h>
 #include <yaml-cpp/yaml.h>
+#include <fmt/core.h>
+
 #include <dict-parsers/JishoParser.h>
 
 using namespace std;
@@ -17,12 +20,11 @@ DictionaryParser *createDictionaryByName(Dictionaries name, DictionaryParser d) 
     }
 }
 
-int main() {
-    string searchTerm;
+int main(int argc, char *argv[]) {
+    setlocale(LC_ALL, "en_US.utf8");
 
-    Dictionaries dictionaries;
-    std::cout << "Type the word: ";
-    getline(cin, searchTerm);
+    char* searchTerm = argv[1];
+    Dictionaries dictionaries = Jisho;
     YAML::Node config = YAML::LoadFile("./config.yaml");
     assert(config["_dicts"].IsSequence());
     //const std::list dicts = config["dicts"].as<std::list>();
@@ -35,8 +37,7 @@ int main() {
 
     JishoParser *jp = (JishoParser *) createDictionaryByName(dictionaries, config[jName].as<DictionaryParser>());
 
-    //printf("%s", jp->getDomain());
-    jp->printURL();
+    jp->getTermInfo(searchTerm);
 
     return 0;
 }

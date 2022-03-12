@@ -7,6 +7,8 @@
 
 #include <yaml-cpp/yaml.h>
 
+#include <iostream>
+
 struct DictionaryParser {
 protected:
     const char *domain{};
@@ -42,7 +44,11 @@ public:
         this->api = api;
     }
 
-    void printURL() {
+    char* getURL() {
+        return strcat((char*)this->domain, (char*)this->api);
+    }
+
+    void printProperties() {
         std::cout << this->domain << this->api;
     }
 };

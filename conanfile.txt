@@ -1,5 +1,9 @@
 [requires]
 yaml-cpp/0.7.0
+libcurl/7.80.0
+tidy-html5/5.8.0
+libxml2/2.9.12
+fmt/7.1.3
 
 [generators]
 cmake
