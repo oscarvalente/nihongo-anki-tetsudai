@@ -9,44 +9,20 @@
 #include <cstdio>
 #include <libxml/parser.h>
 #include <libxml/xpath.h>
+#include <libxml/xmlstring.h>
 #include <fmt/core.h>
 
-#include <util/FileIO.h>
+#include <util/XML.h>
 
-xmlDocPtr getdoc(const char *docname) {
-    xmlDocPtr doc;
-    doc = xmlParseFile(docname);
+xmlDoc *getDoc(const char *input, int size) {
+    xmlDoc *doc = xmlParseMemory(input, size);
 
-    if (doc == NULL) {
+    if (doc == nullptr) {
         fprintf(stderr, "Document not parsed successfully. \n");
         return NULL;
     }
 
     return doc;
-}
-
-xmlXPathObjectPtr getnodeset(xmlDocPtr doc, xmlChar *xpath) {
-
-    xmlXPathContextPtr context;
-    xmlXPathObjectPtr result;
-
-    context = xmlXPathNewContext(doc);
-    if (context == NULL) {
-        printf("Error in xmlXPathNewContext\n");
-        return NULL;
-    }
-    result = xmlXPathEvalExpression(xpath, context);
-    xmlXPathFreeContext(context);
-    if (result == NULL) {
-        printf("Error in xmlXPathEvalExpression\n");
-        return NULL;
-    }
-    if (xmlXPathNodeSetIsEmpty(result->nodesetval)) {
-        xmlXPathFreeObject(result);
-        printf("No result\n");
-        return NULL;
-    }
-    return result;
 }
 
 wchar_t *JishoParser::getTermInfo(char *term) {
@@ -59,34 +35,31 @@ wchar_t *JishoParser::getTermInfo(char *term) {
     TidyDoc tdoc = tidyCreate();                     // Initialize "document"
 
     int ok = JishoParser::parseXML(input, &output, &errbuf, &tdoc);
+    if (ok > 0) {
+        printf("OUCH!\n");
+    }
 
-    printf("\nResult: %d\n", ok);
-
-    char *docname = ".file.xml";
-
-    FileIO::writeToFile(docname, (char *) output.bp, output.size);
-
+    xmlDoc *doc = getDoc((char *) output.bp, output.size - 1);
     JishoParser::cleanXMLBuffers(&output, &errbuf, &tdoc);
 
-    xmlDocPtr doc;
-    auto *xpath = (xmlChar *) "//*[@id=\"secondary\"]/div/ul";
-    xmlNodeSetPtr nodeset;
-    xmlXPathObjectPtr nodesetObject;
-    int i;
-    xmlChar *keyword;
 
-    doc = getdoc(docname);
-    nodesetObject = getnodeset(doc, xpath);
-    if (nodesetObject) {
-        nodeset = nodesetObject->nodesetval;
-        std::cout << nodeset->nodeNr << std::endl;
-        for (i = 0; i < nodeset->nodeNr; i++) {
-            keyword = xmlNodeListGetString(doc, nodeset->nodeTab[i]->xmlChildrenNode, 1);
-            printf("keyword: %s\n", keyword);
-            xmlFree(keyword);
-        }
-        xmlXPathFreeObject(nodesetObject);
-    }
+    auto *xpath = (xmlChar *) "//*[@id=\"secondary\"]/div/ul/li[1]";
+    auto *xpathChild = (xmlChar *) ".//div[2]/ul/li[1]/span[@class='furigana'][1]";
+
+    xmlXPathContext *ctx = xmlXPathNewContext(doc);
+
+    xmlXPathObject *subtreeObject;
+    xmlNode *subtree = XML::findSubtreeRootInDocByXPath(ctx, xpath, subtreeObject);
+    xmlXPathObject *termObject;
+    xmlChar *targetTerm = XML::findTermInSubtreeByXPath(subtree, ctx, xpathChild, termObject);
+
+    printf("child: %s \n", targetTerm);
+
+    xmlFree(targetTerm);
+
+    xmlXPathFreeObject(subtreeObject);
+    xmlXPathFreeContext(ctx);
+
     xmlFreeDoc(doc);
     xmlCleanupParser();
 

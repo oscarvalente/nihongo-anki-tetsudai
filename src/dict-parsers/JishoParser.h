@@ -68,8 +68,6 @@ public:
         int rc = -1;
         Bool ok;
 
-        // printf("Tidying:\t%s\n", input);
-
         ok = tidyOptSetBool(*tdoc, TidyXmlOut, yes);  // Convert to XML
         if (ok)
             rc = tidySetErrorBuffer(*tdoc, errbuf);      // Capture diagnostics
@@ -87,7 +85,7 @@ public:
         if (rc >= 0) {
             if (rc > 0)
                 printf("\nDiagnostics:\n\n%s", (*errbuf).bp);
-            printf("\nAnd here is the result:\n\n%s", (*output).bp);
+//            printf("\nAnd here is the result:\n\n%s", (*output).bp);
         } else
             printf("A severe error (%d) occurred.\n", rc);
         return rc;

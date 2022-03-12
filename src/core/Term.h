@@ -7,18 +7,22 @@
 
 #include <vector>
 
-#include "TermFragment.h"
-
 class Term {
 private:
-    std::vector<TermFragment> fragments;
+    char *furigana;
+    char *original;
 public:
-    Term(std::vector<TermFragment> fv) {
-        fragments = fv;
+    Term(char *f, char *o) {
+        furigana = f;
+        original = o;
     }
 
-    void addTermFragment(TermFragment termFragment) {
-        fragments.push_back(termFragment);
+    Term(char *o) {
+        original = o;
+    }
+
+    bool hasFurigana() {
+        return furigana == nullptr;
     }
 };
 
