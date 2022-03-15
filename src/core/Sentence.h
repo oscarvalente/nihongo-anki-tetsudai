@@ -13,12 +13,27 @@ class Sentence {
 private:
     std::vector<Term> terms;
 public:
+    Sentence() {
+        terms = std::vector<Term>{};
+    }
+
     Sentence(std::vector<Term> tv) {
         terms = tv;
     }
 
-    void addTermFragment(Term term) {
-        terms.push_back(term);
+    void addTerm(Term *term) {
+        terms.push_back(*term);
+    }
+
+    void println_BracketsStyle() {
+        for (int t = 0; t < terms.size(); ++t) {
+            if (terms[t].hasFurigana()) {
+                std::cout << terms[t].getOriginal() << "[" << terms[t].getFurigana() << "]";
+            } else {
+                std::cout << terms[t].getOriginal() << "";
+            }
+        }
+        std::cout << std::endl;
     }
 };
 

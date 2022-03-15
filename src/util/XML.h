@@ -11,18 +11,33 @@
 
 class XML {
 public:
-    static xmlNode *findSubtreeRootInDocByXPath(xmlXPathContext *ctx, xmlChar *xpath, xmlXPathObject *subtreeObj) {
+    static xmlNodeSet *findSubtreeRootInDocByXPath(xmlXPathContext *ctx, xmlChar *xpath, xmlXPathObject *subtreeObj) {
         subtreeObj = xmlXPathEval(xpath, ctx);
         if (xmlXPathNodeSetIsEmpty(subtreeObj->nodesetval)) {
             xmlXPathFreeObject(subtreeObj);
             printf("No result - finding subtree in doc\n");
             return nullptr;
         }
-        return *subtreeObj->nodesetval->nodeTab;
+        return subtreeObj->nodesetval;
+    }
+
+    static xmlNodeSet *
+    findSubtreeInSubtreeByXPath(xmlXPathContext *ctx, xmlNode *parentSubtreeNode, xmlChar *childSubtreeXpath,
+                                xmlXPathObject *childSubtreeObject) {
+        childSubtreeObject = xmlXPathNodeEval(parentSubtreeNode, childSubtreeXpath, ctx);
+
+        if (xmlXPathNodeSetIsEmpty(childSubtreeObject->nodesetval)) {
+            xmlXPathFreeObject(childSubtreeObject);
+            printf("No result - finding child subtree in subtree - %s\n", childSubtreeXpath);
+
+            return nullptr;
+        }
+
+        return childSubtreeObject->nodesetval;
     }
 
     static xmlChar *
-    findTermInSubtreeByXPath(xmlNode *subtreeRoot, xmlXPathContext *ctx, xmlChar *xpath, xmlXPathObject *termObj) {
+    findTermsInSubtreeByXPath(xmlXPathContext *ctx, xmlNode *subtreeRoot, xmlChar *xpath, xmlXPathObject *termObj) {
         termObj = xmlXPathNodeEval(subtreeRoot, (xmlChar *) xpath, ctx);
         if (xmlXPathNodeSetIsEmpty(termObj->nodesetval)) {
             xmlXPathFreeObject(termObj);

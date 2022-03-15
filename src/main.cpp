@@ -37,6 +37,8 @@ int main(int argc, char *argv[]) {
 
     JishoParser *jp = (JishoParser *) createDictionaryByName(dictionaries, config[jName].as<DictionaryParser>());
 
+    jp->printProperties();
+
     jp->getTermInfo(searchTerm);
 
     return 0;

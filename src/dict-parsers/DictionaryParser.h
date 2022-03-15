@@ -44,8 +44,10 @@ public:
         this->api = api;
     }
 
-    char* getURL() {
-        return strcat((char*)this->domain, (char*)this->api);
+    std::string getURL() {
+        std::string url(this->domain);
+        url.append(this->api);
+        return url;
     }
 
     void printProperties() {

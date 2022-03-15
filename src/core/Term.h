@@ -9,20 +9,29 @@
 
 class Term {
 private:
-    char *furigana;
-    char *original;
+    std::string furigana;
+    std::string original;
 public:
-    Term(char *f, char *o) {
+    Term(std::string f, std::string o) {
         furigana = f;
         original = o;
     }
 
-    Term(char *o) {
+    Term(std::string o) {
         original = o;
+        furigana = "";
+    }
+
+    std::string getFurigana() {
+        return this->furigana;
+    }
+
+    std::string getOriginal() {
+        return this->original;
     }
 
     bool hasFurigana() {
-        return furigana == nullptr;
+        return furigana != "";
     }
 };
 
