@@ -227,6 +227,46 @@ set(CONAN_LIBS_FMT ${CONAN_PKG_LIBS_FMT} ${CONAN_SYSTEM_LIBS_FMT} ${CONAN_FRAMEW
 
 
 #################
+###  NCURSES
+#################
+set(CONAN_NCURSES_ROOT "/Users/valenteo/.conan/data/ncurses/6.3/_/_/package/a422dad32b13c1008074a7b788c19a6cfbf09f8e")
+set(CONAN_INCLUDE_DIRS_NCURSES "/Users/valenteo/.conan/data/ncurses/6.3/_/_/package/a422dad32b13c1008074a7b788c19a6cfbf09f8e/include"
+			"/Users/valenteo/.conan/data/ncurses/6.3/_/_/package/a422dad32b13c1008074a7b788c19a6cfbf09f8e/include/ncursesw")
+set(CONAN_LIB_DIRS_NCURSES "/Users/valenteo/.conan/data/ncurses/6.3/_/_/package/a422dad32b13c1008074a7b788c19a6cfbf09f8e/lib")
+set(CONAN_BIN_DIRS_NCURSES "/Users/valenteo/.conan/data/ncurses/6.3/_/_/package/a422dad32b13c1008074a7b788c19a6cfbf09f8e/bin")
+set(CONAN_RES_DIRS_NCURSES "/Users/valenteo/.conan/data/ncurses/6.3/_/_/package/a422dad32b13c1008074a7b788c19a6cfbf09f8e/res")
+set(CONAN_SRC_DIRS_NCURSES )
+set(CONAN_BUILD_DIRS_NCURSES "/Users/valenteo/.conan/data/ncurses/6.3/_/_/package/a422dad32b13c1008074a7b788c19a6cfbf09f8e/"
+			"/Users/valenteo/.conan/data/ncurses/6.3/_/_/package/a422dad32b13c1008074a7b788c19a6cfbf09f8e/lib/cmake")
+set(CONAN_FRAMEWORK_DIRS_NCURSES )
+set(CONAN_LIBS_NCURSES panelw menuw formw ncurses++w ticw ncursesw tinfow)
+set(CONAN_PKG_LIBS_NCURSES panelw menuw formw ncurses++w ticw ncursesw tinfow)
+set(CONAN_SYSTEM_LIBS_NCURSES )
+set(CONAN_FRAMEWORKS_NCURSES )
+set(CONAN_FRAMEWORKS_FOUND_NCURSES "")  # Will be filled later
+set(CONAN_DEFINES_NCURSES "-DNCURSES_STATIC")
+set(CONAN_BUILD_MODULES_PATHS_NCURSES )
+# COMPILE_DEFINITIONS are equal to CONAN_DEFINES without -D, for targets
+set(CONAN_COMPILE_DEFINITIONS_NCURSES "NCURSES_STATIC")
+
+set(CONAN_C_FLAGS_NCURSES "")
+set(CONAN_CXX_FLAGS_NCURSES "")
+set(CONAN_SHARED_LINKER_FLAGS_NCURSES "")
+set(CONAN_EXE_LINKER_FLAGS_NCURSES "")
+
+# For modern cmake targets we use the list variables (separated with ;)
+set(CONAN_C_FLAGS_NCURSES_LIST "")
+set(CONAN_CXX_FLAGS_NCURSES_LIST "")
+set(CONAN_SHARED_LINKER_FLAGS_NCURSES_LIST "")
+set(CONAN_EXE_LINKER_FLAGS_NCURSES_LIST "")
+
+# Apple Frameworks
+conan_find_apple_frameworks(CONAN_FRAMEWORKS_FOUND_NCURSES "${CONAN_FRAMEWORKS_NCURSES}" "_NCURSES" "")
+# Append to aggregated values variable
+set(CONAN_LIBS_NCURSES ${CONAN_PKG_LIBS_NCURSES} ${CONAN_SYSTEM_LIBS_NCURSES} ${CONAN_FRAMEWORKS_FOUND_NCURSES})
+
+
+#################
 ###  ZLIB
 #################
 set(CONAN_ZLIB_ROOT "/Users/valenteo/.conan/data/zlib/1.2.11/_/_/package/647afeb69d3b0a2d3d316e80b24d38c714cc6900")
@@ -316,7 +356,7 @@ set(CONAN_SETTINGS_COMPILER_VERSION "12.0")
 set(CONAN_SETTINGS_OS "Macos")
 set(CONAN_SETTINGS_OS_BUILD "Macos")
 
-set(CONAN_DEPENDENCIES yaml-cpp libcurl tidy-html5 libxml2 fmt zlib libiconv)
+set(CONAN_DEPENDENCIES yaml-cpp libcurl tidy-html5 libxml2 fmt ncurses zlib libiconv)
 # Storing original command line args (CMake helper) flags
 set(CONAN_CMD_CXX_FLAGS ${CONAN_CXX_FLAGS})
 
@@ -330,6 +370,8 @@ set(CONAN_INCLUDE_DIRS "/Users/valenteo/.conan/data/yaml-cpp/0.7.0/_/_/package/6
 			"/Users/valenteo/.conan/data/libxml2/2.9.12/_/_/package/5b35aa03c15cdf2e006f0447701f851c02964e0f/include"
 			"/Users/valenteo/.conan/data/libxml2/2.9.12/_/_/package/5b35aa03c15cdf2e006f0447701f851c02964e0f/include/libxml2"
 			"/Users/valenteo/.conan/data/fmt/7.1.3/_/_/package/e49065ecb5f0d44c4e32f570e965f6a1bd08dd0e/include"
+			"/Users/valenteo/.conan/data/ncurses/6.3/_/_/package/a422dad32b13c1008074a7b788c19a6cfbf09f8e/include"
+			"/Users/valenteo/.conan/data/ncurses/6.3/_/_/package/a422dad32b13c1008074a7b788c19a6cfbf09f8e/include/ncursesw"
 			"/Users/valenteo/.conan/data/zlib/1.2.11/_/_/package/647afeb69d3b0a2d3d316e80b24d38c714cc6900/include"
 			"/Users/valenteo/.conan/data/libiconv/1.16/_/_/package/647afeb69d3b0a2d3d316e80b24d38c714cc6900/include" ${CONAN_INCLUDE_DIRS})
 set(CONAN_LIB_DIRS "/Users/valenteo/.conan/data/yaml-cpp/0.7.0/_/_/package/6a83d7f783e7ee89a83cf2fe72b5f5f67538e2a6/lib"
@@ -337,19 +379,23 @@ set(CONAN_LIB_DIRS "/Users/valenteo/.conan/data/yaml-cpp/0.7.0/_/_/package/6a83d
 			"/Users/valenteo/.conan/data/tidy-html5/5.8.0/_/_/package/d2fcd0c654e542053e46571e7da974c338f3c3e5/lib"
 			"/Users/valenteo/.conan/data/libxml2/2.9.12/_/_/package/5b35aa03c15cdf2e006f0447701f851c02964e0f/lib"
 			"/Users/valenteo/.conan/data/fmt/7.1.3/_/_/package/e49065ecb5f0d44c4e32f570e965f6a1bd08dd0e/lib"
+			"/Users/valenteo/.conan/data/ncurses/6.3/_/_/package/a422dad32b13c1008074a7b788c19a6cfbf09f8e/lib"
 			"/Users/valenteo/.conan/data/zlib/1.2.11/_/_/package/647afeb69d3b0a2d3d316e80b24d38c714cc6900/lib"
 			"/Users/valenteo/.conan/data/libiconv/1.16/_/_/package/647afeb69d3b0a2d3d316e80b24d38c714cc6900/lib" ${CONAN_LIB_DIRS})
 set(CONAN_BIN_DIRS "/Users/valenteo/.conan/data/libcurl/7.80.0/_/_/package/ab8cbd9fd1f5bead5ab27e68f4d31030ffacb912/bin"
 			"/Users/valenteo/.conan/data/libxml2/2.9.12/_/_/package/5b35aa03c15cdf2e006f0447701f851c02964e0f/bin"
+			"/Users/valenteo/.conan/data/ncurses/6.3/_/_/package/a422dad32b13c1008074a7b788c19a6cfbf09f8e/bin"
 			"/Users/valenteo/.conan/data/libiconv/1.16/_/_/package/647afeb69d3b0a2d3d316e80b24d38c714cc6900/bin" ${CONAN_BIN_DIRS})
-set(CONAN_RES_DIRS "/Users/valenteo/.conan/data/libcurl/7.80.0/_/_/package/ab8cbd9fd1f5bead5ab27e68f4d31030ffacb912/res" ${CONAN_RES_DIRS})
+set(CONAN_RES_DIRS "/Users/valenteo/.conan/data/libcurl/7.80.0/_/_/package/ab8cbd9fd1f5bead5ab27e68f4d31030ffacb912/res"
+			"/Users/valenteo/.conan/data/ncurses/6.3/_/_/package/a422dad32b13c1008074a7b788c19a6cfbf09f8e/res" ${CONAN_RES_DIRS})
 set(CONAN_FRAMEWORK_DIRS  ${CONAN_FRAMEWORK_DIRS})
-set(CONAN_LIBS yaml-cpp curl tidy xml2 fmt z iconv charset ${CONAN_LIBS})
-set(CONAN_PKG_LIBS yaml-cpp curl tidy xml2 fmt z iconv charset ${CONAN_PKG_LIBS})
+set(CONAN_LIBS yaml-cpp curl tidy xml2 fmt panelw menuw formw ncurses++w ticw ncursesw tinfow z iconv charset ${CONAN_LIBS})
+set(CONAN_PKG_LIBS yaml-cpp curl tidy xml2 fmt panelw menuw formw ncurses++w ticw ncursesw tinfow z iconv charset ${CONAN_PKG_LIBS})
 set(CONAN_SYSTEM_LIBS  ${CONAN_SYSTEM_LIBS})
 set(CONAN_FRAMEWORKS SystemConfiguration CoreFoundation Security ${CONAN_FRAMEWORKS})
 set(CONAN_FRAMEWORKS_FOUND "")  # Will be filled later
-set(CONAN_DEFINES "-DLIBXML_STATIC"
+set(CONAN_DEFINES "-DNCURSES_STATIC"
+			"-DLIBXML_STATIC"
 			"-DCURL_STATICLIB=1" ${CONAN_DEFINES})
 set(CONAN_BUILD_MODULES_PATHS  ${CONAN_BUILD_MODULES_PATHS})
 set(CONAN_CMAKE_MODULE_PATH "/Users/valenteo/.conan/data/yaml-cpp/0.7.0/_/_/package/6a83d7f783e7ee89a83cf2fe72b5f5f67538e2a6/"
@@ -357,6 +403,8 @@ set(CONAN_CMAKE_MODULE_PATH "/Users/valenteo/.conan/data/yaml-cpp/0.7.0/_/_/pack
 			"/Users/valenteo/.conan/data/tidy-html5/5.8.0/_/_/package/d2fcd0c654e542053e46571e7da974c338f3c3e5/"
 			"/Users/valenteo/.conan/data/libxml2/2.9.12/_/_/package/5b35aa03c15cdf2e006f0447701f851c02964e0f/"
 			"/Users/valenteo/.conan/data/fmt/7.1.3/_/_/package/e49065ecb5f0d44c4e32f570e965f6a1bd08dd0e/"
+			"/Users/valenteo/.conan/data/ncurses/6.3/_/_/package/a422dad32b13c1008074a7b788c19a6cfbf09f8e/"
+			"/Users/valenteo/.conan/data/ncurses/6.3/_/_/package/a422dad32b13c1008074a7b788c19a6cfbf09f8e/lib/cmake"
 			"/Users/valenteo/.conan/data/zlib/1.2.11/_/_/package/647afeb69d3b0a2d3d316e80b24d38c714cc6900/"
 			"/Users/valenteo/.conan/data/libiconv/1.16/_/_/package/647afeb69d3b0a2d3d316e80b24d38c714cc6900/" ${CONAN_CMAKE_MODULE_PATH})
 
@@ -732,6 +780,76 @@ macro(conan_define_targets)
                                                                   $<$<CONFIG:Debug>:${CONAN_C_FLAGS_FMT_DEBUG_LIST}  ${CONAN_CXX_FLAGS_FMT_DEBUG_LIST}>)
 
 
+    set(_CONAN_PKG_LIBS_NCURSES_DEPENDENCIES "${CONAN_SYSTEM_LIBS_NCURSES} ${CONAN_FRAMEWORKS_FOUND_NCURSES} ")
+    string(REPLACE " " ";" _CONAN_PKG_LIBS_NCURSES_DEPENDENCIES "${_CONAN_PKG_LIBS_NCURSES_DEPENDENCIES}")
+    conan_package_library_targets("${CONAN_PKG_LIBS_NCURSES}" "${CONAN_LIB_DIRS_NCURSES}"
+                                  CONAN_PACKAGE_TARGETS_NCURSES "${_CONAN_PKG_LIBS_NCURSES_DEPENDENCIES}"
+                                  "" ncurses)
+    set(_CONAN_PKG_LIBS_NCURSES_DEPENDENCIES_DEBUG "${CONAN_SYSTEM_LIBS_NCURSES_DEBUG} ${CONAN_FRAMEWORKS_FOUND_NCURSES_DEBUG} ")
+    string(REPLACE " " ";" _CONAN_PKG_LIBS_NCURSES_DEPENDENCIES_DEBUG "${_CONAN_PKG_LIBS_NCURSES_DEPENDENCIES_DEBUG}")
+    conan_package_library_targets("${CONAN_PKG_LIBS_NCURSES_DEBUG}" "${CONAN_LIB_DIRS_NCURSES_DEBUG}"
+                                  CONAN_PACKAGE_TARGETS_NCURSES_DEBUG "${_CONAN_PKG_LIBS_NCURSES_DEPENDENCIES_DEBUG}"
+                                  "debug" ncurses)
+    set(_CONAN_PKG_LIBS_NCURSES_DEPENDENCIES_RELEASE "${CONAN_SYSTEM_LIBS_NCURSES_RELEASE} ${CONAN_FRAMEWORKS_FOUND_NCURSES_RELEASE} ")
+    string(REPLACE " " ";" _CONAN_PKG_LIBS_NCURSES_DEPENDENCIES_RELEASE "${_CONAN_PKG_LIBS_NCURSES_DEPENDENCIES_RELEASE}")
+    conan_package_library_targets("${CONAN_PKG_LIBS_NCURSES_RELEASE}" "${CONAN_LIB_DIRS_NCURSES_RELEASE}"
+                                  CONAN_PACKAGE_TARGETS_NCURSES_RELEASE "${_CONAN_PKG_LIBS_NCURSES_DEPENDENCIES_RELEASE}"
+                                  "release" ncurses)
+    set(_CONAN_PKG_LIBS_NCURSES_DEPENDENCIES_RELWITHDEBINFO "${CONAN_SYSTEM_LIBS_NCURSES_RELWITHDEBINFO} ${CONAN_FRAMEWORKS_FOUND_NCURSES_RELWITHDEBINFO} ")
+    string(REPLACE " " ";" _CONAN_PKG_LIBS_NCURSES_DEPENDENCIES_RELWITHDEBINFO "${_CONAN_PKG_LIBS_NCURSES_DEPENDENCIES_RELWITHDEBINFO}")
+    conan_package_library_targets("${CONAN_PKG_LIBS_NCURSES_RELWITHDEBINFO}" "${CONAN_LIB_DIRS_NCURSES_RELWITHDEBINFO}"
+                                  CONAN_PACKAGE_TARGETS_NCURSES_RELWITHDEBINFO "${_CONAN_PKG_LIBS_NCURSES_DEPENDENCIES_RELWITHDEBINFO}"
+                                  "relwithdebinfo" ncurses)
+    set(_CONAN_PKG_LIBS_NCURSES_DEPENDENCIES_MINSIZEREL "${CONAN_SYSTEM_LIBS_NCURSES_MINSIZEREL} ${CONAN_FRAMEWORKS_FOUND_NCURSES_MINSIZEREL} ")
+    string(REPLACE " " ";" _CONAN_PKG_LIBS_NCURSES_DEPENDENCIES_MINSIZEREL "${_CONAN_PKG_LIBS_NCURSES_DEPENDENCIES_MINSIZEREL}")
+    conan_package_library_targets("${CONAN_PKG_LIBS_NCURSES_MINSIZEREL}" "${CONAN_LIB_DIRS_NCURSES_MINSIZEREL}"
+                                  CONAN_PACKAGE_TARGETS_NCURSES_MINSIZEREL "${_CONAN_PKG_LIBS_NCURSES_DEPENDENCIES_MINSIZEREL}"
+                                  "minsizerel" ncurses)
+
+    add_library(CONAN_PKG::ncurses INTERFACE IMPORTED)
+
+    # Property INTERFACE_LINK_FLAGS do not work, necessary to add to INTERFACE_LINK_LIBRARIES
+    set_property(TARGET CONAN_PKG::ncurses PROPERTY INTERFACE_LINK_LIBRARIES ${CONAN_PACKAGE_TARGETS_NCURSES} ${_CONAN_PKG_LIBS_NCURSES_DEPENDENCIES}
+                                                                 $<$<STREQUAL:$<TARGET_PROPERTY:TYPE>,SHARED_LIBRARY>:${CONAN_SHARED_LINKER_FLAGS_NCURSES_LIST}>
+                                                                 $<$<STREQUAL:$<TARGET_PROPERTY:TYPE>,MODULE_LIBRARY>:${CONAN_SHARED_LINKER_FLAGS_NCURSES_LIST}>
+                                                                 $<$<STREQUAL:$<TARGET_PROPERTY:TYPE>,EXECUTABLE>:${CONAN_EXE_LINKER_FLAGS_NCURSES_LIST}>
+
+                                                                 $<$<CONFIG:Release>:${CONAN_PACKAGE_TARGETS_NCURSES_RELEASE} ${_CONAN_PKG_LIBS_NCURSES_DEPENDENCIES_RELEASE}
+                                                                 $<$<STREQUAL:$<TARGET_PROPERTY:TYPE>,SHARED_LIBRARY>:${CONAN_SHARED_LINKER_FLAGS_NCURSES_RELEASE_LIST}>
+                                                                 $<$<STREQUAL:$<TARGET_PROPERTY:TYPE>,MODULE_LIBRARY>:${CONAN_SHARED_LINKER_FLAGS_NCURSES_RELEASE_LIST}>
+                                                                 $<$<STREQUAL:$<TARGET_PROPERTY:TYPE>,EXECUTABLE>:${CONAN_EXE_LINKER_FLAGS_NCURSES_RELEASE_LIST}>>
+
+                                                                 $<$<CONFIG:RelWithDebInfo>:${CONAN_PACKAGE_TARGETS_NCURSES_RELWITHDEBINFO} ${_CONAN_PKG_LIBS_NCURSES_DEPENDENCIES_RELWITHDEBINFO}
+                                                                 $<$<STREQUAL:$<TARGET_PROPERTY:TYPE>,SHARED_LIBRARY>:${CONAN_SHARED_LINKER_FLAGS_NCURSES_RELWITHDEBINFO_LIST}>
+                                                                 $<$<STREQUAL:$<TARGET_PROPERTY:TYPE>,MODULE_LIBRARY>:${CONAN_SHARED_LINKER_FLAGS_NCURSES_RELWITHDEBINFO_LIST}>
+                                                                 $<$<STREQUAL:$<TARGET_PROPERTY:TYPE>,EXECUTABLE>:${CONAN_EXE_LINKER_FLAGS_NCURSES_RELWITHDEBINFO_LIST}>>
+
+                                                                 $<$<CONFIG:MinSizeRel>:${CONAN_PACKAGE_TARGETS_NCURSES_MINSIZEREL} ${_CONAN_PKG_LIBS_NCURSES_DEPENDENCIES_MINSIZEREL}
+                                                                 $<$<STREQUAL:$<TARGET_PROPERTY:TYPE>,SHARED_LIBRARY>:${CONAN_SHARED_LINKER_FLAGS_NCURSES_MINSIZEREL_LIST}>
+                                                                 $<$<STREQUAL:$<TARGET_PROPERTY:TYPE>,MODULE_LIBRARY>:${CONAN_SHARED_LINKER_FLAGS_NCURSES_MINSIZEREL_LIST}>
+                                                                 $<$<STREQUAL:$<TARGET_PROPERTY:TYPE>,EXECUTABLE>:${CONAN_EXE_LINKER_FLAGS_NCURSES_MINSIZEREL_LIST}>>
+
+                                                                 $<$<CONFIG:Debug>:${CONAN_PACKAGE_TARGETS_NCURSES_DEBUG} ${_CONAN_PKG_LIBS_NCURSES_DEPENDENCIES_DEBUG}
+                                                                 $<$<STREQUAL:$<TARGET_PROPERTY:TYPE>,SHARED_LIBRARY>:${CONAN_SHARED_LINKER_FLAGS_NCURSES_DEBUG_LIST}>
+                                                                 $<$<STREQUAL:$<TARGET_PROPERTY:TYPE>,MODULE_LIBRARY>:${CONAN_SHARED_LINKER_FLAGS_NCURSES_DEBUG_LIST}>
+                                                                 $<$<STREQUAL:$<TARGET_PROPERTY:TYPE>,EXECUTABLE>:${CONAN_EXE_LINKER_FLAGS_NCURSES_DEBUG_LIST}>>)
+    set_property(TARGET CONAN_PKG::ncurses PROPERTY INTERFACE_INCLUDE_DIRECTORIES ${CONAN_INCLUDE_DIRS_NCURSES}
+                                                                      $<$<CONFIG:Release>:${CONAN_INCLUDE_DIRS_NCURSES_RELEASE}>
+                                                                      $<$<CONFIG:RelWithDebInfo>:${CONAN_INCLUDE_DIRS_NCURSES_RELWITHDEBINFO}>
+                                                                      $<$<CONFIG:MinSizeRel>:${CONAN_INCLUDE_DIRS_NCURSES_MINSIZEREL}>
+                                                                      $<$<CONFIG:Debug>:${CONAN_INCLUDE_DIRS_NCURSES_DEBUG}>)
+    set_property(TARGET CONAN_PKG::ncurses PROPERTY INTERFACE_COMPILE_DEFINITIONS ${CONAN_COMPILE_DEFINITIONS_NCURSES}
+                                                                      $<$<CONFIG:Release>:${CONAN_COMPILE_DEFINITIONS_NCURSES_RELEASE}>
+                                                                      $<$<CONFIG:RelWithDebInfo>:${CONAN_COMPILE_DEFINITIONS_NCURSES_RELWITHDEBINFO}>
+                                                                      $<$<CONFIG:MinSizeRel>:${CONAN_COMPILE_DEFINITIONS_NCURSES_MINSIZEREL}>
+                                                                      $<$<CONFIG:Debug>:${CONAN_COMPILE_DEFINITIONS_NCURSES_DEBUG}>)
+    set_property(TARGET CONAN_PKG::ncurses PROPERTY INTERFACE_COMPILE_OPTIONS ${CONAN_C_FLAGS_NCURSES_LIST} ${CONAN_CXX_FLAGS_NCURSES_LIST}
+                                                                  $<$<CONFIG:Release>:${CONAN_C_FLAGS_NCURSES_RELEASE_LIST} ${CONAN_CXX_FLAGS_NCURSES_RELEASE_LIST}>
+                                                                  $<$<CONFIG:RelWithDebInfo>:${CONAN_C_FLAGS_NCURSES_RELWITHDEBINFO_LIST} ${CONAN_CXX_FLAGS_NCURSES_RELWITHDEBINFO_LIST}>
+                                                                  $<$<CONFIG:MinSizeRel>:${CONAN_C_FLAGS_NCURSES_MINSIZEREL_LIST} ${CONAN_CXX_FLAGS_NCURSES_MINSIZEREL_LIST}>
+                                                                  $<$<CONFIG:Debug>:${CONAN_C_FLAGS_NCURSES_DEBUG_LIST}  ${CONAN_CXX_FLAGS_NCURSES_DEBUG_LIST}>)
+
+
     set(_CONAN_PKG_LIBS_ZLIB_DEPENDENCIES "${CONAN_SYSTEM_LIBS_ZLIB} ${CONAN_FRAMEWORKS_FOUND_ZLIB} ")
     string(REPLACE " " ";" _CONAN_PKG_LIBS_ZLIB_DEPENDENCIES "${_CONAN_PKG_LIBS_ZLIB_DEPENDENCIES}")
     conan_package_library_targets("${CONAN_PKG_LIBS_ZLIB}" "${CONAN_LIB_DIRS_ZLIB}"
@@ -871,7 +989,7 @@ macro(conan_define_targets)
                                                                   $<$<CONFIG:MinSizeRel>:${CONAN_C_FLAGS_LIBICONV_MINSIZEREL_LIST} ${CONAN_CXX_FLAGS_LIBICONV_MINSIZEREL_LIST}>
                                                                   $<$<CONFIG:Debug>:${CONAN_C_FLAGS_LIBICONV_DEBUG_LIST}  ${CONAN_CXX_FLAGS_LIBICONV_DEBUG_LIST}>)
 
-    set(CONAN_TARGETS CONAN_PKG::yaml-cpp CONAN_PKG::libcurl CONAN_PKG::tidy-html5 CONAN_PKG::libxml2 CONAN_PKG::fmt CONAN_PKG::zlib CONAN_PKG::libiconv)
+    set(CONAN_TARGETS CONAN_PKG::yaml-cpp CONAN_PKG::libcurl CONAN_PKG::tidy-html5 CONAN_PKG::libxml2 CONAN_PKG::fmt CONAN_PKG::ncurses CONAN_PKG::zlib CONAN_PKG::libiconv)
 
 endmacro()
 
@@ -1456,3 +1574,4 @@ endmacro()
 
 ### Definition of user declared vars (user_info) ###
 
+set(CONAN_USER_NCURSES_lib_suffix "w")

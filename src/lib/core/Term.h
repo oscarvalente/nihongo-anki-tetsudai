@@ -6,6 +6,8 @@
 #define NIHONGO_ANKI_TETSUDAI_TERM_H
 
 #include <vector>
+#include <string>
+#include <iostream>
 
 class Term {
 private:

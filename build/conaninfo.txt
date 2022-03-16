@@ -10,6 +10,7 @@
     fmt/7.Y.Z
     libcurl/7.Y.Z
     libxml2/2.Y.Z
+    ncurses/6.Y.Z
     tidy-html5/5.Y.Z
     yaml-cpp/0.7.0
 
@@ -31,6 +32,7 @@
     libcurl/7.80.0:ab8cbd9fd1f5bead5ab27e68f4d31030ffacb912
     libiconv/1.16:647afeb69d3b0a2d3d316e80b24d38c714cc6900
     libxml2/2.9.12:5b35aa03c15cdf2e006f0447701f851c02964e0f
+    ncurses/6.3:a422dad32b13c1008074a7b788c19a6cfbf09f8e
     tidy-html5/5.8.0:d2fcd0c654e542053e46571e7da974c338f3c3e5
     yaml-cpp/0.7.0:6a83d7f783e7ee89a83cf2fe72b5f5f67538e2a6
     zlib/1.2.11:647afeb69d3b0a2d3d316e80b24d38c714cc6900
@@ -113,6 +115,16 @@
     libxml2:xpath=True
     libxml2:xptr=True
     libxml2:zlib=True
+    ncurses:fPIC=True
+    ncurses:shared=False
+    ncurses:with_cxx=True
+    ncurses:with_extended_colors=True
+    ncurses:with_pcre2=False
+    ncurses:with_progs=True
+    ncurses:with_reentrant=False
+    ncurses:with_ticlib=auto
+    ncurses:with_tinfo=auto
+    ncurses:with_widec=True
     tidy-html5:fPIC=True
     tidy-html5:shared=False
     tidy-html5:support_localizations=True

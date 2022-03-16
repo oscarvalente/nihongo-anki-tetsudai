@@ -11,12 +11,23 @@ include_directories(src)
 include(./build/conan_paths.cmake)
 include(./build/conanbuildinfo.cmake)
 include(./build/FindCURL.cmake)
-include_directories(${CONAN_YAML-CPP_ROOT} ${CONAN_LIBCURL_ROOT} ${CONAN_ZLIB_ROOT} ${CONAN_TIDY-HTML5_ROOT} ${CONAN_FMT_ROOT} ${CONAN_LIBXML2_ROOT} ${CMAKE_MODULE_PATH})
-conan_basic_setup(TARGET)
+include(./build/FindCurses.cmake)
+include_directories(${CMAKE_MODULE_PATH})
 
+
+conan_basic_setup(TARGET)
 
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/config.yaml ./bin COPYONLY)
 
-add_executable(nihongo_anki_tetsudai src/main.cpp src/dict-parsers/JishoParser.cpp)
+# Libraries
 
-target_link_libraries(nihongo_anki_tetsudai yaml-cpp curl CURL::libcurl tidy fmt xml2 iconv ${TARGETS})
+set(HEADER_FILES src/lib/dict-parsers/JishoParser.h src/lib/core/Cache.h)
+add_library(nihongo_anki_tetsudai-lib src/lib/dict-parsers/JishoParser.cpp src/lib/core/Cache.cpp ${HEADER_FILES})
+target_include_directories(nihongo_anki_tetsudai-lib PRIVATE src/lib)
+
+#Exec
+
+add_executable(nihongo_anki_tetsudai src/main.cpp ${HEADER_FILES})
+target_include_directories(nihongo_anki_tetsudai PRIVATE src/lib)
+
+target_link_libraries(nihongo_anki_tetsudai nihongo_anki_tetsudai-lib yaml-cpp curl CURL::libcurl tidy fmt xml2 iconv ncurses ${ncurses_COMPONENTS} ${TARGETS})

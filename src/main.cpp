@@ -3,9 +3,10 @@
 
 #include <assert.h>
 #include <yaml-cpp/yaml.h>
-#include <fmt/core.h>
 
-#include <dict-parsers/JishoParser.h>
+#include <lib/dict-parsers/JishoParser.h>
+#include <lib/util/Prompt.h>
+#include <lib/core/Cache.h>
 
 using namespace std;
 
@@ -22,7 +23,7 @@ DictionaryParser *createDictionaryByName(Dictionaries name, DictionaryParser d) 
 
 int main(int argc, char *argv[]) {
     setlocale(LC_ALL, "en_US.utf8");
-
+    Cache::getInstance(); // init cache
     char* searchTerm = argv[1];
     Dictionaries dictionaries = Jisho;
     YAML::Node config = YAML::LoadFile("./config.yaml");
@@ -39,7 +40,9 @@ int main(int argc, char *argv[]) {
 
     jp->printProperties();
 
-    jp->getTermInfo(searchTerm);
+    std::vector<Sentence> sampleSentences = *jp->fetchSampleSentences(searchTerm);
+
+    Prompt::listSampleSentences(&sampleSentences);
 
     return 0;
 }

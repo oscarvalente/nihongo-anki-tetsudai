@@ -16,6 +16,8 @@
 #include <cstdio>
 #include <cerrno>
 
+#include "lib/core/Sentence.h"
+
 struct JishoParser : DictionaryParser {
 public:
     JishoParser() : DictionaryParser() {
@@ -29,7 +31,7 @@ public:
         api = _api;
     }
 
-    wchar_t *getTermInfo(char *);
+    std::vector<Sentence> *fetchSampleSentences(char *);
 
     std::string getSearchURL(char *term) {
         std::string url(this->getURL());

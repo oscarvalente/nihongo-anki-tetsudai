@@ -12,9 +12,9 @@
 #include <libxml/xmlstring.h>
 #include <fmt/core.h>
 
-#include <core/Term.h>
-#include <core/Sentence.h>
-#include <util/XML.h>
+#include <lib/util/XML.h>
+#include <lib/core/Sentence.h>
+#include <lib/core/Cache.h>
 
 xmlDoc *getDoc(const char *input, int size) {
     xmlDoc *doc = xmlParseMemory(input, size);
@@ -27,9 +27,7 @@ xmlDoc *getDoc(const char *input, int size) {
     return doc;
 }
 
-wchar_t *JishoParser::getTermInfo(char *term) {
-    static wchar_t *sentence;
-
+std::vector<Sentence> *JishoParser::fetchSampleSentences(char *term) {
     std::string result = JishoParser::getHTTP(term);
 
     const char *input = result.c_str();
@@ -44,6 +42,8 @@ wchar_t *JishoParser::getTermInfo(char *term) {
     }
 
     xmlDoc *doc = getDoc((char *) output.bp, output.size - 1);
+    Cache::getInstance()->cacheDoc(doc);
+
     JishoParser::cleanXMLBuffers(&output, &errbuf, &tdoc);
 
 
@@ -60,7 +60,7 @@ wchar_t *JishoParser::getTermInfo(char *term) {
     xmlNodeSet *contentSubtreeSet = XML::findSubtreeRootInDocByXPath(ctx, contentSubtreePath, contentObject);
 
     if (contentSubtreeSet == nullptr) {
-        return sentence;
+        return nullptr;
     }
 
     xmlXPathObject *sentenceListObject = nullptr;
@@ -78,7 +78,7 @@ wchar_t *JishoParser::getTermInfo(char *term) {
     std::vector<Sentence> sentences{};
 
     for (int s = 0; s < sentenceNodeSize; ++s) { // for each found sentence
-        Sentence *sentence = new Sentence();
+        auto *sentence = new Sentence();
         xmlXPathObject *sentenceObject = nullptr;
 
         std::string sIndex("[" + std::to_string(s + 1) + "]");
@@ -156,6 +156,8 @@ wchar_t *JishoParser::getTermInfo(char *term) {
         }
     }
 
+    Cache::getInstance()->cacheSampleSentences(&sentences);
+
 
     if (sentenceListObject != nullptr) {
         xmlXPathFreeObject(sentenceListObject);
@@ -171,5 +173,5 @@ wchar_t *JishoParser::getTermInfo(char *term) {
     xmlFreeDoc(doc);
     xmlCleanupParser();
 
-    return sentence;
+    return Cache::getInstance()->getSampleSentences();
 }

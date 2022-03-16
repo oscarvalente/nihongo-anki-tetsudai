@@ -2,13 +2,14 @@
  "graph_lock": {
   "nodes": {
    "0": {
-    "options": "fmt:fPIC=True\nfmt:header_only=False\nfmt:shared=False\nfmt:with_fmt_alias=False\nfmt:with_os_api=True\nlibcurl:fPIC=True\nlibcurl:shared=False\nlibcurl:with_brotli=False\nlibcurl:with_c_ares=False\nlibcurl:with_cookies=True\nlibcurl:with_crypto_auth=True\nlibcurl:with_dict=True\nlibcurl:with_docs=False\nlibcurl:with_file=True\nlibcurl:with_ftp=True\nlibcurl:with_gopher=True\nlibcurl:with_http=True\nlibcurl:with_imap=True\nlibcurl:with_ipv6=True\nlibcurl:with_largemaxwritesize=False\nlibcurl:with_ldap=False\nlibcurl:with_libidn=False\nlibcurl:with_libpsl=False\nlibcurl:with_librtmp=False\nlibcurl:with_libssh2=False\nlibcurl:with_mqtt=True\nlibcurl:with_nghttp2=False\nlibcurl:with_ntlm=True\nlibcurl:with_ntlm_wb=True\nlibcurl:with_pop3=True\nlibcurl:with_proxy=True\nlibcurl:with_rtsp=True\nlibcurl:with_smb=True\nlibcurl:with_smtp=True\nlibcurl:with_ssl=darwinssl\nlibcurl:with_symbol_hiding=False\nlibcurl:with_telnet=True\nlibcurl:with_tftp=True\nlibcurl:with_unix_sockets=True\nlibcurl:with_verbose_debug=True\nlibcurl:with_zlib=True\nlibcurl:with_zstd=False\nlibiconv:fPIC=True\nlibiconv:shared=False\nlibxml2:c14n=True\nlibxml2:catalog=True\nlibxml2:docbook=True\nlibxml2:fPIC=True\nlibxml2:ftp=True\nlibxml2:html=True\nlibxml2:http=True\nlibxml2:iconv=True\nlibxml2:icu=False\nlibxml2:include_utils=True\nlibxml2:iso8859x=True\nlibxml2:legacy=True\nlibxml2:lzma=False\nlibxml2:mem-debug=False\nlibxml2:output=True\nlibxml2:pattern=True\nlibxml2:push=True\nlibxml2:python=False\nlibxml2:reader=True\nlibxml2:regexps=True\nlibxml2:run-debug=False\nlibxml2:sax1=True\nlibxml2:schemas=True\nlibxml2:schematron=True\nlibxml2:shared=False\nlibxml2:threads=True\nlibxml2:tree=True\nlibxml2:valid=True\nlibxml2:writer=True\nlibxml2:xinclude=True\nlibxml2:xpath=True\nlibxml2:xptr=True\nlibxml2:zlib=True\ntidy-html5:fPIC=True\ntidy-html5:shared=False\ntidy-html5:support_localizations=True\nyaml-cpp:fPIC=True\nyaml-cpp:shared=False\nzlib:fPIC=True\nzlib:shared=False",
+    "options": "fmt:fPIC=True\nfmt:header_only=False\nfmt:shared=False\nfmt:with_fmt_alias=False\nfmt:with_os_api=True\nlibcurl:fPIC=True\nlibcurl:shared=False\nlibcurl:with_brotli=False\nlibcurl:with_c_ares=False\nlibcurl:with_cookies=True\nlibcurl:with_crypto_auth=True\nlibcurl:with_dict=True\nlibcurl:with_docs=False\nlibcurl:with_file=True\nlibcurl:with_ftp=True\nlibcurl:with_gopher=True\nlibcurl:with_http=True\nlibcurl:with_imap=True\nlibcurl:with_ipv6=True\nlibcurl:with_largemaxwritesize=False\nlibcurl:with_ldap=False\nlibcurl:with_libidn=False\nlibcurl:with_libpsl=False\nlibcurl:with_librtmp=False\nlibcurl:with_libssh2=False\nlibcurl:with_mqtt=True\nlibcurl:with_nghttp2=False\nlibcurl:with_ntlm=True\nlibcurl:with_ntlm_wb=True\nlibcurl:with_pop3=True\nlibcurl:with_proxy=True\nlibcurl:with_rtsp=True\nlibcurl:with_smb=True\nlibcurl:with_smtp=True\nlibcurl:with_ssl=darwinssl\nlibcurl:with_symbol_hiding=False\nlibcurl:with_telnet=True\nlibcurl:with_tftp=True\nlibcurl:with_unix_sockets=True\nlibcurl:with_verbose_debug=True\nlibcurl:with_zlib=True\nlibcurl:with_zstd=False\nlibiconv:fPIC=True\nlibiconv:shared=False\nlibxml2:c14n=True\nlibxml2:catalog=True\nlibxml2:docbook=True\nlibxml2:fPIC=True\nlibxml2:ftp=True\nlibxml2:html=True\nlibxml2:http=True\nlibxml2:iconv=True\nlibxml2:icu=False\nlibxml2:include_utils=True\nlibxml2:iso8859x=True\nlibxml2:legacy=True\nlibxml2:lzma=False\nlibxml2:mem-debug=False\nlibxml2:output=True\nlibxml2:pattern=True\nlibxml2:push=True\nlibxml2:python=False\nlibxml2:reader=True\nlibxml2:regexps=True\nlibxml2:run-debug=False\nlibxml2:sax1=True\nlibxml2:schemas=True\nlibxml2:schematron=True\nlibxml2:shared=False\nlibxml2:threads=True\nlibxml2:tree=True\nlibxml2:valid=True\nlibxml2:writer=True\nlibxml2:xinclude=True\nlibxml2:xpath=True\nlibxml2:xptr=True\nlibxml2:zlib=True\nncurses:fPIC=True\nncurses:shared=False\nncurses:with_cxx=True\nncurses:with_extended_colors=True\nncurses:with_pcre2=False\nncurses:with_progs=True\nncurses:with_reentrant=False\nncurses:with_ticlib=auto\nncurses:with_tinfo=auto\nncurses:with_widec=True\ntidy-html5:fPIC=True\ntidy-html5:shared=False\ntidy-html5:support_localizations=True\nyaml-cpp:fPIC=True\nyaml-cpp:shared=False\nzlib:fPIC=True\nzlib:shared=False",
     "requires": [
      "1",
      "2",
      "4",
      "5",
-     "7"
+     "7",
+     "8"
     ],
     "path": "../conanfile.txt",
     "context": "host"
@@ -66,6 +67,13 @@
     "ref": "fmt/7.1.3",
     "options": "fPIC=True\nheader_only=False\nshared=False\nwith_fmt_alias=False\nwith_os_api=True",
     "package_id": "e49065ecb5f0d44c4e32f570e965f6a1bd08dd0e",
+    "prev": "0",
+    "context": "host"
+   },
+   "8": {
+    "ref": "ncurses/6.3",
+    "options": "fPIC=True\nshared=False\nwith_cxx=True\nwith_extended_colors=True\nwith_pcre2=False\nwith_progs=True\nwith_reentrant=False\nwith_ticlib=auto\nwith_tinfo=auto\nwith_widec=True",
+    "package_id": "a422dad32b13c1008074a7b788c19a6cfbf09f8e",
     "prev": "0",
     "context": "host"
    }

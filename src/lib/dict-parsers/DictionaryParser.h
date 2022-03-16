@@ -26,8 +26,6 @@ public:
         api = _api;
     }
 
-    //virtual char *getTermSentence(char *term) = 0;
-
     const char *getDomain() {
         return this->domain;
     }
