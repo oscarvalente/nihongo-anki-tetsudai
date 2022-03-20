@@ -17,35 +17,44 @@ public:
         terms = std::vector<Term>{};
     }
 
-    Sentence(std::vector<Term> tv) {
-        terms = tv;
+    Sentence(const Sentence &sentence) {
+        terms = std::vector<Term>(sentence.terms);
+    }
+
+    explicit Sentence(std::vector<Term> *tv) {
+        terms = *tv;
     }
 
     void addTerm(Term *term) {
         terms.push_back(*term);
     }
 
-    std::string toString() {
-        std::string sentence;
+    std::vector<Term> *getTerms() {
+        return &terms;
+    }
+
+    std::wstring toString() {
+        std::wstring sentence;
         for (auto &term: terms) {
             if (term.hasFurigana()) {
-                sentence.append(term.getOriginal() + "[" + term.getFurigana() + "]");
+                sentence.append(term.getOriginal() + L"[" + term.getFurigana() + L"]");
             } else {
-                sentence.append(term.getOriginal() + "");
+                sentence.append(term.getOriginal());
             }
         }
+
         return sentence;
     }
 
     void println_BracketsStyle() {
         for (auto &term: terms) {
             if (term.hasFurigana()) {
-                std::cout << term.getOriginal() << "[" << term.getFurigana() << "]";
+                std::wcout << term.getOriginal() << L"[" << term.getFurigana() << L"]";
             } else {
-                std::cout << term.getOriginal() << "";
+                std::wcout << term.getOriginal();
             }
         }
-        std::cout << std::endl;
+        std::wcout << std::endl;
     }
 };
 

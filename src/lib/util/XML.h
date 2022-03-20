@@ -46,6 +46,12 @@ public:
         }
         return xmlNodeGetContent(termObj->nodesetval->nodeTab[0]);
     }
+
+    static std::wstring xmlCharToWString(const xmlChar *xmlString) {
+        wchar_t wstr[sizeof(xmlString)];
+        std::mbstowcs(wstr, (const char *) xmlString, sizeof(xmlString));
+        return wstr;
+    }
 };
 
 #endif //NIHONGO_ANKI_TETSUDAI_XML_H

@@ -36,7 +36,7 @@ public:
     }
 
     xmlDoc *getDoc() {
-        return &doc;
+        return &instance->doc;
     }
 
     std::vector<Sentence> *cacheSampleSentences(std::vector<Sentence> *ss) {
@@ -45,7 +45,30 @@ public:
     }
 
     std::vector<Sentence> *getSampleSentences() {
-        return &sampleSentences;
+        return &instance->sampleSentences;
+    }
+
+    void printDoc() {
+        xmlChar *s;
+        int size;
+        xmlDocDumpMemory(&doc, &s, &size);
+        std::cout << (char *) s << std::endl;
+        xmlFree(s);
+    }
+
+    void printSentences() {
+        for (auto s: instance->sampleSentences) {
+            std::wcout << s.toString() << std::endl;
+        }
+    }
+
+    void printInfo() {
+        std::cout << "\tCache state" << std::endl;
+        std::cout << "\t\tXML Doc:\n\n";
+        instance->printDoc();
+        std::cout << "\n\n\n";
+        std::cout << "\t\tSample Sentences (" << instance->sampleSentences.size() << "):\n\n" << std::endl;
+        instance->printSentences();
     }
 };
 

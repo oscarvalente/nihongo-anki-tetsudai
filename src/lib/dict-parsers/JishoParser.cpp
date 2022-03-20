@@ -119,10 +119,15 @@ std::vector<Sentence> *JishoParser::fetchSampleSentences(char *term) {
 
             Term *theTerm;
             if (furiganaTerm == nullptr) {
-                theTerm = new Term(std::string((char *) originalTerm));
+                theTerm = new Term((wchar_t *) XML::xmlCharToWString(originalTerm).c_str());
             } else {
-                theTerm = new Term(std::string((char *) furiganaTerm), std::string((char *) originalTerm));
+                theTerm = new Term((wchar_t *) XML::xmlCharToWString(furiganaTerm).c_str(), (wchar_t *) XML::xmlCharToWString(originalTerm).c_str());
             }
+//            std::cout << "\nXML::xmlCharToWString" << "\n";
+//            printf("printf: %ls\n", XML::xmlCharToWString(originalTerm).c_str());
+//            std::cout << "cout: " << XML::xmlCharToWString(originalTerm).c_str() << "\n";
+//            std::wcout << "wcout: " << XML::xmlCharToWString(originalTerm) << "\n";
+//            std::cout << "END        XML::xmlCharToWString" << "\n";
 
             sentence->addTerm(theTerm);
 
@@ -144,7 +149,7 @@ std::vector<Sentence> *JishoParser::fetchSampleSentences(char *term) {
             }
         }
 
-        sentence->println_BracketsStyle();
+//        sentence->println_BracketsStyle();
         sentences.push_back(*sentence);
 
         if (termListObject != nullptr) {

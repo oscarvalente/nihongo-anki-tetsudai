@@ -11,29 +11,38 @@
 
 class Term {
 private:
-    std::string furigana;
-    std::string original;
+    std::wstring furigana;
+    std::wstring original;
 public:
-    Term(std::string f, std::string o) {
+    Term(std::wstring f, std::wstring o) {
         furigana = f;
         original = o;
     }
 
-    Term(std::string o) {
+    Term(std::wstring o) {
         original = o;
-        furigana = "";
+        furigana = L"";
     }
 
-    std::string getFurigana() {
+    Term(const Term &term) {
+        furigana = std::wstring(term.furigana);
+        original = std::wstring(term.original);
+    }
+
+    std::wstring getFurigana() {
         return this->furigana;
     }
 
-    std::string getOriginal() {
+    std::wstring getOriginal() {
         return this->original;
     }
 
     bool hasFurigana() {
-        return furigana != "";
+        return furigana != L"";
+    }
+
+    void print() {
+        std::wcout << original << "[" << furigana << "]" << std::endl;
     }
 };
 

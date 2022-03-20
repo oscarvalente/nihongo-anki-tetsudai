@@ -22,7 +22,7 @@ configure_file(${CMAKE_CURRENT_SOURCE_DIR}/config.yaml ./bin COPYONLY)
 # Libraries
 
 set(HEADER_FILES src/lib/dict-parsers/JishoParser.h src/lib/core/Cache.h)
-add_library(nihongo_anki_tetsudai-lib src/lib/dict-parsers/JishoParser.cpp src/lib/core/Cache.cpp ${HEADER_FILES})
+add_library(nihongo_anki_tetsudai-lib src/lib/dict-parsers/JishoParser.cpp src/lib/core/Cache.cpp ${HEADER_FILES} src/lib/util/Conversion.h)
 target_include_directories(nihongo_anki_tetsudai-lib PRIVATE src/lib)
 
 #Exec
