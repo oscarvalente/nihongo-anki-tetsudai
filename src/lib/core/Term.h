@@ -5,6 +5,7 @@
 #ifndef NIHONGO_ANKI_TETSUDAI_TERM_H
 #define NIHONGO_ANKI_TETSUDAI_TERM_H
 
+#include <utility>
 #include <vector>
 #include <string>
 #include <iostream>
@@ -15,12 +16,12 @@ private:
     std::wstring original;
 public:
     Term(std::wstring f, std::wstring o) {
-        furigana = f;
-        original = o;
+        furigana = std::move(f);
+        original = std::move(o);
     }
 
     Term(std::wstring o) {
-        original = o;
+        original = std::move(o);
         furigana = L"";
     }
 
@@ -38,11 +39,11 @@ public:
     }
 
     bool hasFurigana() {
-        return furigana != L"";
+        return !furigana.empty();
     }
 
     void print() {
-        std::wcout << original << "[" << furigana << "]" << std::endl;
+        std::wcout << original << L"[" << furigana << L"]" << std::endl;
     }
 };
 

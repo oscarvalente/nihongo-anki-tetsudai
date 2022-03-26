@@ -52,9 +52,11 @@ int main(int argc, char *argv[]) {
 
     std::vector<Sentence> *sampleSentences = jp->fetchSampleSentences(searchTerm);
 
-    Cache::getInstance()->printInfo();
+//    Cache::getInstance()->printInfo();
 
-    Screen::listSampleSentences(sampleSentences);
+    int choice = Screen::listSampleSentences(sampleSentences);
+
+    std::cout << "choice: " <<  choice;
 
     return 0;
 }

@@ -14,29 +14,15 @@
 #include "lib/core/Sentence.h"
 #include "Conversion.h"
 
+#ifndef KEY_ENT
+#define KEY_ENT 10
+#endif
+#ifndef KEY_ESCAPE
+#define KEY_ESCAPE 27
+#endif
+
 class Screen {
 public:
-    static void print_in_middle(WINDOW *win, int starty, int startx, int width, wchar_t *string, chtype color) {
-        int length, x, y;
-        float temp;
-        if (win == NULL)
-            win = stdscr;
-        getyx(win, y, x);
-        if (startx != 0)
-            x = startx;
-        if (starty != 0)
-            y = starty;
-        if (width == 0)
-            width = 400;
-        length = wcslen(string);
-        temp = (width - length) / 2;
-        x = startx + (int) temp;
-        wattron(win, color);
-        mvwprintw(win, y, x, "%ls", string);
-        wattroff(win, color);
-        refresh();
-    }
-
     static std::wstring convert(Sentence &s) {
         std::wstring str = s.toString();
         return (wchar_t *) str.c_str();
@@ -57,10 +43,11 @@ public:
 
         // makes it so we can use arrow keys
         keypad(menuwin, true);
-        int choice;
+        int key;
+        int theChoice = -2;
         int highlight = 0;
 
-        while (true) {
+        while (theChoice < -1) {
             for (int i = 0; i < ss->size(); i++) {
                 if (i == highlight) {
                     wattron(menuwin, A_REVERSE);
@@ -68,8 +55,9 @@ public:
                 mvwprintw(menuwin, i + 1, 1, "%ls", (wchar_t *) ss->at(i).toString().c_str());
                 wattroff(menuwin, A_REVERSE);
             }
-            choice = wgetch(menuwin);
-            switch (choice) {
+
+            key = wgetch(menuwin);
+            switch (key) {
                 case KEY_UP:
                     if (highlight > 0) {
                         highlight--;
@@ -80,16 +68,22 @@ public:
                         highlight++;
                     }
                     break;
+                case KEY_ENT:
+                    theChoice = highlight;
+                    break;
+                case KEY_ESCAPE:
+                    theChoice = -1;
+                    break;
                 default:
                     break;
             }
-            if (choice == 21) break;
         }
 
-        getch();
+        clrtoeol();
+        refresh();
         endwin();
 
-        return 0;
+        return theChoice;
     }
 
 };

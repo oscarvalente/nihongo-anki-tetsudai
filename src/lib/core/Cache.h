@@ -57,8 +57,9 @@ public:
     }
 
     void printSentences() {
+        int i = 0;
         for (auto s: instance->sampleSentences) {
-            std::wcout << s.toString() << std::endl;
+            std::wcout << s.toString().c_str() << std::endl;
         }
     }
 
@@ -66,9 +67,9 @@ public:
         std::cout << "\tCache state" << std::endl;
         std::cout << "\t\tXML Doc:\n\n";
         instance->printDoc();
-        std::cout << "\n\n\n";
         std::cout << "\t\tSample Sentences (" << instance->sampleSentences.size() << "):\n\n" << std::endl;
         instance->printSentences();
+        std::cout << "\n";
     }
 };
 

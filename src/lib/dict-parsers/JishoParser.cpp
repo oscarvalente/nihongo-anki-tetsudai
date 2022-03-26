@@ -72,9 +72,6 @@ std::vector<Sentence> *JishoParser::fetchSampleSentences(char *term) {
 
     int sentenceNodeSize = (sentenceListSubtreeSet != nullptr) ? sentenceListSubtreeSet->nodeNr : 0;
 
-    std::cout << "Content nodes: " << contentSubtreeSet->nodeNr << std::endl;
-    std::cout << "Sentence nodes: " << sentenceListSubtreeSet->nodeNr << std::endl;
-
     std::vector<Sentence> sentences{};
 
     for (int s = 0; s < sentenceNodeSize; ++s) { // for each found sentence
@@ -97,8 +94,6 @@ std::vector<Sentence> *JishoParser::fetchSampleSentences(char *term) {
 
         int termListNodeSize = (termListSubtreeSet != nullptr) ? termListSubtreeSet->nodeNr : 0;
 
-        std::cout << "Term nodes: " << termListSubtreeSet->nodeNr << " in sentence " << s + 1 << std::endl;
-
         for (int t = 0; t < termListNodeSize; ++t) {
             std::string tIndex("[" + std::to_string(t + 1) + "]");
             xmlXPathObject *termPairObject = nullptr;
@@ -107,7 +102,6 @@ std::vector<Sentence> *JishoParser::fetchSampleSentences(char *term) {
                                                                        (xmlChar *) fmt::format(termPathTemp,
                                                                                                tIndex).c_str(),
                                                                        termPairObject); // grouping furigana+original
-
 
             xmlXPathObject *furiganaTermObject = nullptr;
             xmlXPathObject *originalTermObject = nullptr;
@@ -121,13 +115,9 @@ std::vector<Sentence> *JishoParser::fetchSampleSentences(char *term) {
             if (furiganaTerm == nullptr) {
                 theTerm = new Term((wchar_t *) XML::xmlCharToWString(originalTerm).c_str());
             } else {
-                theTerm = new Term((wchar_t *) XML::xmlCharToWString(furiganaTerm).c_str(), (wchar_t *) XML::xmlCharToWString(originalTerm).c_str());
+                theTerm = new Term((wchar_t *) XML::xmlCharToWString(furiganaTerm).c_str(),
+                                   (wchar_t *) XML::xmlCharToWString(originalTerm).c_str());
             }
-//            std::cout << "\nXML::xmlCharToWString" << "\n";
-//            printf("printf: %ls\n", XML::xmlCharToWString(originalTerm).c_str());
-//            std::cout << "cout: " << XML::xmlCharToWString(originalTerm).c_str() << "\n";
-//            std::wcout << "wcout: " << XML::xmlCharToWString(originalTerm) << "\n";
-//            std::cout << "END        XML::xmlCharToWString" << "\n";
 
             sentence->addTerm(theTerm);
 
@@ -149,7 +139,6 @@ std::vector<Sentence> *JishoParser::fetchSampleSentences(char *term) {
             }
         }
 
-//        sentence->println_BracketsStyle();
         sentences.push_back(*sentence);
 
         if (termListObject != nullptr) {
@@ -162,7 +151,6 @@ std::vector<Sentence> *JishoParser::fetchSampleSentences(char *term) {
     }
 
     Cache::getInstance()->cacheSampleSentences(&sentences);
-
 
     if (sentenceListObject != nullptr) {
         xmlXPathFreeObject(sentenceListObject);
