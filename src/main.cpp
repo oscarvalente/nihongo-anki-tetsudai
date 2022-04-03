@@ -14,7 +14,10 @@
 
 #include <lib/dict-parsers/JishoParser.h>
 #include <lib/util/Screen.h>
+#include <lib/util/Conversion.h>
+#include <lib/util/Lexic.h>
 #include <lib/core/Cache.h>
+#include <lib/anki/VocabCardAdapter.h>
 
 using namespace std;
 
@@ -35,6 +38,7 @@ int main(int argc, char *argv[]) {
 
     Cache::getInstance(); // init cache
     char *searchTerm = argv[1];
+    Cache::getInstance()->cacheTargetTerm((wchar_t *) Conversion::charToWString(searchTerm).c_str());
     Dictionaries dictionaries = Jisho;
     YAML::Node config = YAML::LoadFile("./config.yaml");
     assert(config["_dicts"].IsSequence());
@@ -54,9 +58,12 @@ int main(int argc, char *argv[]) {
 
 //    Cache::getInstance()->printInfo();
 
-    int choice = Screen::listSampleSentences(sampleSentences);
+    VocabCardAdapter::convert(&sampleSentences->at(0));
 
-    std::cout << "choice: " <<  choice;
+//    int choice = Screen::listSampleSentences(sampleSentences);
+
+//    std::cout << "choice: " <<  choice;
+
 
     return 0;
 }

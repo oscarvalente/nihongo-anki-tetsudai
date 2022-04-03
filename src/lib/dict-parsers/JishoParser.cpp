@@ -13,6 +13,7 @@
 #include <fmt/core.h>
 
 #include <lib/util/XML.h>
+#include <lib/util/Conversion.h>
 #include <lib/core/Sentence.h>
 #include <lib/core/Cache.h>
 
@@ -113,10 +114,10 @@ std::vector<Sentence> *JishoParser::fetchSampleSentences(char *term) {
 
             Term *theTerm;
             if (furiganaTerm == nullptr) {
-                theTerm = new Term((wchar_t *) XML::xmlCharToWString(originalTerm).c_str());
+                theTerm = new Term((wchar_t *) Conversion::charToWString((const char *) originalTerm).c_str());
             } else {
-                theTerm = new Term((wchar_t *) XML::xmlCharToWString(furiganaTerm).c_str(),
-                                   (wchar_t *) XML::xmlCharToWString(originalTerm).c_str());
+                theTerm = new Term((wchar_t *) Conversion::charToWString((const char *) furiganaTerm).c_str(),
+                                   (wchar_t *) Conversion::charToWString((const char *) originalTerm).c_str());
             }
 
             sentence->addTerm(theTerm);

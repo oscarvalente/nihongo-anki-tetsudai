@@ -16,6 +16,12 @@ public:
 
         return v->data();
     }
+
+    static std::wstring charToWString(const char *charString) {
+        wchar_t wstr[sizeof(charString) * sizeof(wchar_t)];
+        std::mbstowcs(wstr, (const char *) charString, sizeof(charString) * sizeof(wchar_t));
+        return wstr;
+    }
 };
 
 #endif //NIHONGO_ANKI_TETSUDAI_CONVERSION_H

@@ -10,6 +10,8 @@
 #include <string>
 #include <iostream>
 
+#include "lib/util/Lexic.h"
+
 class Term {
 private:
     std::wstring furigana;
@@ -40,6 +42,27 @@ public:
 
     bool hasFurigana() {
         return !furigana.empty();
+    }
+
+    std::wstring toKana() {
+        std::wstring kanaTerm;
+        bool wasReplaced = false;
+
+        for (int c = 0; c < original.size(); c++) {
+            std::wstring character = original.substr(c, 1);
+            if (Lexic::isKana(character)) {
+                kanaTerm.append(character);
+            } else {
+                // if it's kanji
+                if (!wasReplaced) {
+                    // replace kanji by furigana on 1st kanji found
+                    kanaTerm.append(furigana);
+                }
+                // and no more
+                wasReplaced = true;
+            }
+        }
+        return kanaTerm;
     }
 
     void print() {

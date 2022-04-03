@@ -20,6 +20,7 @@ private:
     static Cache *instance;
     xmlDoc doc;
     std::vector<Sentence> sampleSentences;
+    std::wstring targetTerm;
 
     Cache() {}
 
@@ -48,6 +49,11 @@ public:
         return &instance->sampleSentences;
     }
 
+    std::wstring *cacheTargetTerm(std::wstring t) {
+        targetTerm = std::move(t);
+        return &targetTerm;
+    }
+
     void printDoc() {
         xmlChar *s;
         int size;
@@ -64,12 +70,17 @@ public:
     }
 
     void printInfo() {
-        std::cout << "\tCache state" << std::endl;
-        std::cout << "\t\tXML Doc:\n\n";
+        std::cout << "\t\033[4m\033[95m\033[41mCACHE STATE\033[m" << std::endl;
+        std::cout << "\t\tTarget term:\n\n";
+        std::wcout << targetTerm;
+        std::cout << std::endl << std::endl;
+        std::cout << "\t\tXML Doc:" << std::endl;
+        std::cout << std::endl << std::endl;
         instance->printDoc();
+        std::cout << std::endl << std::endl;
         std::cout << "\t\tSample Sentences (" << instance->sampleSentences.size() << "):\n\n" << std::endl;
         instance->printSentences();
-        std::cout << "\n";
+        std::cout << std::endl;
     }
 };
 
