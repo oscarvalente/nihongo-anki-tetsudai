@@ -1,8 +1,8 @@
 //
-// Created by Óscar Valente on 13/02/2022.
+// Created by Óscar Valente on 29/04/2022.
 //
 
-#include "JishoParser.h"
+#include "TanoshiiJapanese.h"
 
 #include <iostream>
 #include <tidy.h>
@@ -17,8 +17,8 @@
 #include <lib/core/Sentence.h>
 #include <lib/core/Cache.h>
 
-std::vector<Sentence> *JishoParser::fetchSampleSentences(char *term) {
-    std::string result = JishoParser::getHTTP(term);
+std::vector<Sentence> *TanoshiiJapanese::fetchSampleSentences(char *term) {
+    std::string result = TanoshiiJapanese::getHTTP(term);
 
     const char *input = result.c_str();
 
@@ -35,6 +35,7 @@ std::vector<Sentence> *JishoParser::fetchSampleSentences(char *term) {
     Cache::getInstance()->cacheDoc(doc);
 
     XML::cleanXMLBuffers(&output, &errbuf, &tdoc);
+
 
     xmlXPathContext *ctx = xmlXPathNewContext(doc);
 

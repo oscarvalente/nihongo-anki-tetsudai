@@ -13,6 +13,7 @@
 #include <ncursesw/curses.h>
 
 #include <lib/dict-parsers/JishoParser.h>
+#include <lib/dict-parsers/TanoshiiJapanese.h>
 #include <lib/util/Screen.h>
 #include <lib/util/Conversion.h>
 #include <lib/util/Lexic.h>
@@ -22,13 +23,16 @@
 using namespace std;
 
 enum Dictionaries {
-    Jisho
+    Jisho,
+    Tanoshiijapanese
 };
 
 DictionaryParser *createDictionaryByName(Dictionaries name, DictionaryParser d) {
     switch (name) {
         case Dictionaries::Jisho:
             return new JishoParser(&d);
+        case Dictionaries::Tanoshiijapanese:
+            return new TanoshiiJapanese(&d);
     }
 }
 
@@ -48,7 +52,7 @@ int main(int argc, char *argv[]) {
         auto dictionary = config["_dicts"][i].as<std::string>();
         assert(config[dictionary].IsMap());
     }
-    auto jName = config["_dicts"][0].as<std::string>();
+    auto jName = config["_dicts"][0].as<std::string>(); // using tanoshii - [1]
 
     JishoParser *jp = (JishoParser *) createDictionaryByName(dictionaries, config[jName].as<DictionaryParser>());
 

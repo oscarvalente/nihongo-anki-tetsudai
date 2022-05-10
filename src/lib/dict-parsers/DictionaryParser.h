@@ -9,6 +9,8 @@
 
 #include <iostream>
 
+#include "lib/core/Sentence.h"
+
 struct DictionaryParser {
 protected:
     const char *domain{};

@@ -1,9 +1,9 @@
 //
-// Created by Óscar Valente on 13/02/2022.
+// Created by Óscar Valente on 29/04/2022.
 //
 
-#ifndef NIHONGO_ANKI_TETSUDAI_JISHOPARSER_H
-#define NIHONGO_ANKI_TETSUDAI_JISHOPARSER_H
+#ifndef NIHONGO_ANKI_TETSUDAI_TANOSHIIJAPANESE_H
+#define NIHONGO_ANKI_TETSUDAI_TANOSHIIJAPANESE_H
 
 #include "DictionaryParser.h"
 
@@ -17,16 +17,17 @@
 #include <cerrno>
 
 #include "lib/core/Sentence.h"
+#include "lib/util/HTTP.h"
 
-struct JishoParser : DictionaryParser {
+struct TanoshiiJapanese : DictionaryParser {
 public:
-    JishoParser() : DictionaryParser() {
+    TanoshiiJapanese() : DictionaryParser() {
     }
 
-    explicit JishoParser(DictionaryParser *d) : DictionaryParser(d) {
+    explicit TanoshiiJapanese(DictionaryParser *d) : DictionaryParser(d) {
     }
 
-    JishoParser(char *_url, char *_api) : DictionaryParser(_url, _api) {
+    TanoshiiJapanese(char *_url, char *_api) : DictionaryParser(_url, _api) {
         domain = _url;
         api = _api;
     }
@@ -38,13 +39,8 @@ public:
         return fmt::format(url, term);
     }
 
-    bool operator==(JishoParser &rhs) {
+    bool operator==(TanoshiiJapanese &rhs) {
         return this->getDomain() == rhs.getDomain() && this->getAPI() == rhs.getAPI();
-    }
-
-    static size_t WriteCallback(void *contents, size_t size, size_t nmemb, void *userp) {
-        ((std::string *) userp)->append((char *) contents, size * nmemb);
-        return size * nmemb;
     }
 
     std::string getHTTP(const char *term) {
@@ -57,7 +53,7 @@ public:
             curl_easy_setopt(curl, CURLOPT_URL, this->getSearchURL(encodedSearchTerm).c_str());
             curl_easy_setopt(curl, CURLOPT_TIMEOUT, 4L);
             curl_easy_setopt(curl, CURLOPT_HTTPGET, 1);
-            curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);
+            curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, HTTP::WriteCallback);
             curl_easy_setopt(curl, CURLOPT_WRITEDATA, &readBuffer);
             res = curl_easy_perform(curl);
             curl_easy_cleanup(curl);
@@ -67,4 +63,4 @@ public:
     }
 };
 
-#endif //NIHONGO_ANKI_TETSUDAI_JISHOPARSER_H
+#endif //NIHONGO_ANKI_TETSUDAI_TANOSHIIJAPANESE_H

@@ -1,7 +1,11 @@
 _dicts:
   - jisho
+  - tanoshiijapanese
   #- japandict
   #- wwwjdic
 jisho:
   domain: https://jisho.org
   api: /search/{0}%20%23sentences
+tanoshiijapanese:
+  domain: https://www.tanoshiijapanese.com
+  api: /dictionary/index.cfm?j={0}&e=&search=Search+%3E
